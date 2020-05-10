@@ -1,0 +1,32 @@
+{
+  "name": "present-list",
+  "version": "1.0.0",
+  "description": "Present List Built with MERN Stack",
+  "main": "server.js",
+  "scripts": {
+    "client-install" : "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robinsos/present-list.git"
+  },
+  "author": "Simon Robinson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robinsos/present-list/issues"
+  },
+  "homepage": "https://github.com/robinsos/present-list#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.12"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
