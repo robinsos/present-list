@@ -1,0 +1,4 @@
+export const GET_PRESENTS = 'GET_PRESENTS';
+export const ADD_PRESENT = 'ADD_PRESENT';
+export const DELETE_PRESENT = 'DELETE_PRESENT';
+export const PRESENTS_LOADING = 'PRESENTS_LOADING';

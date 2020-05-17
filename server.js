@@ -1,23 +1,25 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
-const items = require('./routes/api/items');
+const presents = require('./routes/api/presents');
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 const db = require('./config/keys').mongoURI;
 console.log(`Attempting to connect to URI: ${db}`);
 // Connect to mongo
 
-mongoose.connect(db)
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log('MongoDB Connected...'))
 .catch(err=> console.log(err));
 
 // Use Routes
-app.use('/api/items', items);
+app.use('/api/presents', presents);
 
 const port = process.env.PORT || 5000;
 
