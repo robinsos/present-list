@@ -1,22 +1,27 @@
-import React, {Component} from 'react';
+import React from 'react';
 import AppNavbar from './components/AppNavbar';
 import PresentList from './components/PresentList'
+import PresentListHolder from './components/PresentListHolder'
 import { Provider } from 'react-redux';
 import store from './store';
-import ItemModal from './components/ItemModal';
-import {Container} from 'reactstrap';
+import PresentModal from './components/PresentModal';
+import {Container, Button} from 'reactstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+//            <PresentModal actionType="Add"/>
+// <PresentList/>
+
+
 function App() {
+  
   return (
     <Provider store={store}>
       <div className="App">
         <AppNavbar/>
         <Container>
-           <ItemModal/>
-           <PresentList/>
+          <PresentListHolder/>
         </Container>
       </div>
     </Provider>
