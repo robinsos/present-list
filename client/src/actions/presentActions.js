@@ -1,74 +1,74 @@
-import axios from "axios";
+import { axio } from './axio';
 import {
   GET_PRESENTS,
   ADD_PRESENT,
   EDIT_PRESENT,
   DELETE_PRESENT,
-  PRESENTS_LOADING,
-} from "./types";
+  PRESENTS_LOADING
+} from './types';
 
-const axio = axios.create({
-  baseURL: "http://localhost:5000/",
-  timeout: 1000,
-});
+import { tokenConfig } from './authActions';
+import { returnErrors } from './errorActions';
 
 export const getPresents = () => (dispatch) => {
   dispatch(setPresentsLoading());
   axio
-    .get("api/presents")
+    .get('api/presents')
     .then((res) => {
       dispatch({
         type: GET_PRESENTS,
-        payload: res.data,
+        payload: res.data
       });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
-export const addPresent = (present) => dispatch => {
+export const addPresent = (present) => (dispatch, getState) => {
   axio
-    .post("api/presents", present)
+    .post('api/presents', present, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: ADD_PRESENT,
-        payload: res.data,
+        payload: res.data
       });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
-export const editPresent = (present) => dispatch => {
-    axio
-      .post(`api/presents/edit/${present._id}`, present)
-      .then((res) => {
-        dispatch({
-          type: EDIT_PRESENT,
-          payload: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
+export const editPresent = (present) => (dispatch, getState) => {
+  axio
+    .post(`api/presents/edit/${present._id}`, present, tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: EDIT_PRESENT,
+        payload: res.data
       });
-  };
+    })
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
 
-export const deletePresent = (id) => dispatch => {
-  axio.delete(`api/presents/${id}`)
-    .then( (res) => {
-        dispatch({
-            type: DELETE_PRESENT,
-            payload: id,
-        })
-    }).catch(err => {
-        console.log(err);
-    });  
+export const deletePresent = (id) => (dispatch, getState) => {
+  axio
+    .delete(`api/presents/${id}`, tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: DELETE_PRESENT,
+        payload: id
+      });
+    })
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
 export const setPresentsLoading = () => {
   return {
-    type: PRESENTS_LOADING,
+    type: PRESENTS_LOADING
   };
 };

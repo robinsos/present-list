@@ -1,11 +1,15 @@
-import React, { Component } from "react";
-import { Container, Button, Table } from "reactstrap";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { connect } from "react-redux";
-import { getPresents, deletePresent, editPresent } from "../actions/presentActions";
-import PresentModal from "./PresentModal";
-import PropTypes from "prop-types";
-import { isValidURL } from "./Utils";
+import React, { Component } from 'react';
+import { Container, Button, Table } from 'reactstrap';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { connect } from 'react-redux';
+import {
+  getPresents,
+  deletePresent,
+  editPresent
+} from '../actions/presentActions';
+import PresentModal from './PresentModal';
+import PropTypes from 'prop-types';
+import { isValidURL } from './Utils';
 
 class PresentList extends Component {
   state = {
@@ -13,6 +17,12 @@ class PresentList extends Component {
     editId: '',
     description: '',
     address: ''
+  };
+
+  static propTypes = {
+    editPresents: PropTypes.func.isRequired,
+    getPresents: PropTypes.func.isRequired,
+    presents: PropTypes.object.isRequired
   };
 
   componentDidMount() {
@@ -24,10 +34,10 @@ class PresentList extends Component {
   };
 
   onEditClick = (present) => {
-    this.setState({ 
+    this.setState({
       editId: present._id,
-      description: present.description, 
-      address: present.address 
+      description: present.description,
+      address: present.address
     });
     this.toggle();
   };
@@ -40,26 +50,26 @@ class PresentList extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmitEditPresent = e => {
-    console.log("Submit EDIT");
+  onSubmitEditPresent = (e) => {
+    console.log('Submit EDIT');
     e.preventDefault();
     const newPresent = {
-        _id: this.state.editId,
-        description: this.state.description,
-        address: this.state.address
-    }
+      _id: this.state.editId,
+      description: this.state.description,
+      address: this.state.address
+    };
     // Add item via addItem action
-    console.log("Submit EDIT1" + newPresent.description);
+    console.log('Submit EDIT1' + newPresent.description);
     this.props.editPresent(newPresent);
     this.toggle();
-}
+  };
 
   render() {
     const { presents } = this.props.presents;
     return (
       <Container>
         <PresentModal
-          actionType="Edit"
+          actionType='Edit'
           isOpen={this.state.modalVisible}
           toggleVisibility={this.toggle}
           description={this.state.description}
@@ -68,29 +78,42 @@ class PresentList extends Component {
           onSubmit={this.onSubmitEditPresent}
         />
         <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel='stylesheet'
+          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
         />
-        <TransitionGroup className="present-list">
+        <TransitionGroup className='present-list'>
           <table>
             <tbody>
               {presents.map((present) => (
                 <CSSTransition
                   key={present._id}
                   timeout={500}
-                  classNames="fade"
-                  component="td"
+                  classNames='fade'
+                  component='td'
                 >
                   <tr>
                     <td>
-                      { isValidURL(present.address) ? <a href={present.address}>{present.description}</a> : present.description }
+                      {isValidURL(present.address) ? (
+                        <a href={present.address}>{present.description}</a>
+                      ) : (
+                        present.description
+                      )}
                     </td>
                     <td>
-                      <Button outline  color="primary" size="sm" 
-                          onClick={this.onEditClick.bind(this, present)}>Edit</Button>
+                      <Button
+                        outline
+                        color='primary'
+                        size='sm'
+                        onClick={this.onEditClick.bind(this, present)}
+                      >
+                        Edit
+                      </Button>
                     </td>
                     <td>
-                      <Button close onClick={this.onDeleteClick.bind(this, present._id)}/>
+                      <Button
+                        close
+                        onClick={this.onDeleteClick.bind(this, present._id)}
+                      />
                     </td>
                   </tr>
                 </CSSTransition>
@@ -103,16 +126,13 @@ class PresentList extends Component {
   }
 }
 
-PresentList.propTypes = {
-  editPresents: PropTypes.func.isRequired,
-  getPresents: PropTypes.func.isRequired,
-  presents: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = (state) => ({
   presents: state.presents,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { getPresents, deletePresent, editPresent })(
-  PresentList
-);
+export default connect(mapStateToProps, {
+  getPresents,
+  deletePresent,
+  editPresent
+})(PresentList);
