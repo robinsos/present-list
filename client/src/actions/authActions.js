@@ -1,5 +1,3 @@
-import axios from 'axios';
-import React, { Component } from 'react';
 import { axio } from './axio';
 import { returnErrors } from './errorActions';
 
@@ -19,7 +17,6 @@ import {
 export const loadUser = () => (dispatch, getState) => {
   // User loading
   dispatch({ type: USER_LOADING });
-
   axio
     .get('api/auth/user', tokenConfig(getState))
     .then((res) =>

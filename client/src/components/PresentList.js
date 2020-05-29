@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Button, Table } from 'reactstrap';
+import { Container, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import {
@@ -59,7 +59,6 @@ class PresentList extends Component {
       address: this.state.address
     };
     // Add item via addItem action
-    console.log('Submit EDIT1' + newPresent.description);
     this.props.editPresent(newPresent);
     this.toggle();
   };

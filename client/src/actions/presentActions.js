@@ -1,4 +1,4 @@
-import { axio } from './axio';
+import { axio, baseURL } from './axio';
 import {
   GET_PRESENTS,
   ADD_PRESENT,
@@ -12,6 +12,7 @@ import { returnErrors } from './errorActions';
 
 export const getPresents = () => (dispatch) => {
   dispatch(setPresentsLoading());
+  console.log('BASE URL = ' + baseURL);
   axio
     .get('api/presents')
     .then((res) => {
