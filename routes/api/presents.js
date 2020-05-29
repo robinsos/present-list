@@ -10,7 +10,7 @@ const Present = require('../../models/Present');
 // @access Public
 router.get('/', (req, res) => {
   Present.find()
-    .sort({ date: -1 })
+    .sort({ dateChanged: -1 })
     .then((presents) => res.json(presents));
 });
 
