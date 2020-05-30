@@ -40,5 +40,5 @@
       "last 1 safari version"
     ]
   },
-  "_comment_proxy": "http://localhost:5000"
+  "comment_proxy": "http://localhost:5000"
 }
