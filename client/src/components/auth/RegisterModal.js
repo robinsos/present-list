@@ -69,6 +69,7 @@ class RegisterModal extends Component {
       password
     };
     // Attempt registration
+    console.log('Attempting Registration');
     this.props.register(newUser);
   };
 

@@ -43,15 +43,17 @@ export const register = ({ name, email, password }) => (dispatch) => {
   };
 
   const body = JSON.stringify({ name, email, password });
+  console.log('Registration details: ' + body);
 
   axios
     .post('/api/users', body, config)
-    .then((res) =>
+    .then((res) => {
+      console.log('Registration succeeded.');
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+    })
     .catch((err) => {
       console.log('GGG: ' + err);
       dispatch(

@@ -31,9 +31,12 @@ app.use('/api/auth', require('./routes/api/auth'));
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
+  console.log('In production');
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
+} else {
+  console.log('NOT in production');
 }
 
 const port = process.env.PORT || 5000;
