@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Button } from 'reactstrap';
+import { Container, Button, Table } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import {
@@ -20,7 +20,7 @@ class PresentList extends Component {
   };
 
   static propTypes = {
-    editPresents: PropTypes.func.isRequired,
+    editPresent: PropTypes.func.isRequired,
     getPresents: PropTypes.func.isRequired,
     presents: PropTypes.object.isRequired
   };
@@ -81,7 +81,7 @@ class PresentList extends Component {
           href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
         />
         <TransitionGroup className='present-list'>
-          <table>
+          <Table>
             <tbody>
               {presents.map((present) => (
                 <CSSTransition
@@ -118,7 +118,7 @@ class PresentList extends Component {
                 </CSSTransition>
               ))}
             </tbody>
-          </table>
+          </Table>
         </TransitionGroup>
       </Container>
     );

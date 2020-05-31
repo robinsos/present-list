@@ -1,4 +1,5 @@
 import axios from 'axios';
+//import config from 'config';
 //import { axio, blurb } from './axio';
 import {
   GET_PRESENTS,
@@ -13,7 +14,8 @@ import { returnErrors } from './errorActions';
 
 export const getPresents = () => (dispatch) => {
   dispatch(setPresentsLoading());
-  console.log('BOB=' + process.env.BOB);
+
+  console.log('process.env=' + JSON.stringify(process.env));
   axios
     .get('api/presents')
     .then((res) => {

@@ -1,29 +1,29 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const config = require("config");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const config = require('config');
+const jwt = require('jsonwebtoken');
 
 // Present Model
-const User = require("../../models/User");
+const User = require('../../models/User');
 
 // @route POST api/users
 // @desc Register new user
 // @access Public
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
   const { name, email, password } = req.body;
 
   // Simple validation
   if (!name || !email || !password) {
-    return res.status(400).json({ msg: "Please enter all fields." });
+    return res.status(400).json({ msg: 'Please enter all fields.' });
   }
   User.findOne({ email }).then((user) => {
-    if (user) return res.status(400).json({ msg: "User already exists." });
+    if (user) return res.status(400).json({ msg: 'User already exists.' });
 
     const newUser = new User({
       name,
       email,
-      password,
+      password
     });
     // Create salt and hash
     bcrypt.genSalt(10, (err, salt) => {
@@ -33,7 +33,7 @@ router.post("/", (req, res) => {
         newUser.save().then((user) => {
           jwt.sign(
             { id: user.id },
-            config.get("jwtSecret"),
+            config.get('jwtSecret'),
             { expiresIn: 3600 },
             (err, token) => {
               if (err) throw err;
@@ -42,8 +42,8 @@ router.post("/", (req, res) => {
                 user: {
                   id: user.id,
                   name: user.name,
-                  email: user.email,
-                },
+                  email: user.email
+                }
               });
             }
           );
