@@ -13,6 +13,7 @@ import { returnErrors } from './errorActions';
 
 export const getPresents = () => (dispatch) => {
   dispatch(setPresentsLoading());
+  console.log('BOB=' + process.env.BOB);
   axios
     .get('api/presents')
     .then((res) => {
