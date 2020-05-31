@@ -19,6 +19,8 @@ class App extends Component {
 
   render() {
     console.log('process.env' + JSON.stringify(process.env));
+    console.log('BOB=' + process.env.BOB);
+    console.log('REACT_APP_BOB=' + process.env.REACT_APP_BOB);
     return (
       <Provider store={store}>
         <div className='App'>
