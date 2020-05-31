@@ -40,5 +40,5 @@
       "last 1 safari version"
     ]
   },
-  "dddproxy": "https://damp-tor-32321.herokuapp.com:5000"
+  "proxy": "http://localhost:5000"
 }

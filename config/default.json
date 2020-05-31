@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://robinsos:<password>@cluster0-uwuwb.gcp.mongodb.net/test?retryWrites=true&w=majority",
+  "mongoURI": "mongodb://localhost:27017",
   "jwtSecret": "sl_myJwtSecret1"
 }

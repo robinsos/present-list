@@ -1,4 +1,5 @@
-import { axio, baseURL, blurb } from './axio';
+import axios from 'axios';
+//import { axio, blurb } from './axio';
 import {
   GET_PRESENTS,
   ADD_PRESENT,
@@ -12,9 +13,7 @@ import { returnErrors } from './errorActions';
 
 export const getPresents = () => (dispatch) => {
   dispatch(setPresentsLoading());
-  console.log('BASE URL = ' + baseURL);
-  console.log('BLURB = ' + blurb);
-  axio
+  axios
     .get('api/presents')
     .then((res) => {
       dispatch({
@@ -28,7 +27,7 @@ export const getPresents = () => (dispatch) => {
 };
 
 export const addPresent = (present) => (dispatch, getState) => {
-  axio
+  axios
     .post('api/presents', present, tokenConfig(getState))
     .then((res) => {
       dispatch({
@@ -42,7 +41,7 @@ export const addPresent = (present) => (dispatch, getState) => {
 };
 
 export const editPresent = (present) => (dispatch, getState) => {
-  axio
+  axios
     .post(`api/presents/edit/${present._id}`, present, tokenConfig(getState))
     .then((res) => {
       dispatch({
@@ -56,7 +55,7 @@ export const editPresent = (present) => (dispatch, getState) => {
 };
 
 export const deletePresent = (id) => (dispatch, getState) => {
-  axio
+  axios
     .delete(`api/presents/${id}`, tokenConfig(getState))
     .then((res) => {
       dispatch({

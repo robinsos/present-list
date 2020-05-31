@@ -1,4 +1,5 @@
-import { axio } from './axio';
+//import { axio } from './axio';
+import axios from 'axios';
 import { returnErrors } from './errorActions';
 
 import {
@@ -17,7 +18,7 @@ import {
 export const loadUser = () => (dispatch, getState) => {
   // User loading
   dispatch({ type: USER_LOADING });
-  axio
+  axios
     .get('api/auth/user', tokenConfig(getState))
     .then((res) =>
       dispatch({
@@ -43,7 +44,7 @@ export const register = ({ name, email, password }) => (dispatch) => {
 
   const body = JSON.stringify({ name, email, password });
 
-  axio
+  axios
     .post('/api/users', body, config)
     .then((res) =>
       dispatch({
@@ -70,7 +71,7 @@ export const login = ({ email, password }) => (dispatch) => {
 
   const body = JSON.stringify({ email, password });
 
-  axio
+  axios
     .post('/api/auth', body, config)
     .then((res) =>
       dispatch({
