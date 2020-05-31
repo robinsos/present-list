@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const config = require('config');
-const keys = require('config/keys');
+const keys = require('./config/keys');
 
 const app = express();
 
